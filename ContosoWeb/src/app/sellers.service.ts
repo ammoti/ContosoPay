@@ -4,7 +4,7 @@ import {HttpClient,HttpHeaders} from '@angular/common/http';
 @Injectable()
 export class SellersService {
   private headers:HttpHeaders;
-  private accessPointUrl: string = 'https://localhost:44301/api/Seller';
+  private accessPointUrl: string = 'https://contosoapi20181103090012.azurewebsites.net/api/Seller';
   constructor(private http:HttpClient) {
     this.headers = new HttpHeaders({'Content-Type':'application/json;charset=utf-8'})
    }
