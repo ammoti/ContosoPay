@@ -14,5 +14,8 @@ namespace Contoso.Data.Abstract
         public interface ISellerRepository : IEntityBaseRepository<Seller> { }
 
         public interface IOperationRepository : IEntityBaseRepository<Operation> { }
+
+        public interface IReportRepository: IEntityBaseRepository<Report> { }
+
     }
 }

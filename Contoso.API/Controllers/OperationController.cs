@@ -35,6 +35,21 @@ namespace Contoso.API.Controllers
                 return NotFound();
             }
         }
+        [HttpGet(Name = "GetAllOperation")]
+        public IActionResult GetAll()
+        {
+            IEnumerable<Operation> _operations = _operationRepository.AllIncluding(x => x.Seller).ToList();
+
+            if (_operations != null)
+            {
+                IEnumerable<OperationViewModel> _opsVM = Mapper.Map<IEnumerable<Operation>, IEnumerable<OperationViewModel>>(_operations);
+                return new OkObjectResult(_opsVM);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
         [HttpPost]
         public IActionResult Create([FromBody]OperationViewModel operation)
         {

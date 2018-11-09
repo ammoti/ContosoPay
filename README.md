@@ -4,3 +4,7 @@
 #Create the Models and Data Repositories
 #Apply EF Core migrations from a different assembly that the DbContext belongs
 #Build the API using REST architecture principles
+
+#For the run angular-project
+#npm install
+#ng serve

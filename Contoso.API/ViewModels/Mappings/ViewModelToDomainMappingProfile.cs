@@ -14,7 +14,8 @@ namespace Contoso.API.ViewModels.Mappings
             CreateMap<SaleViewModel,Sale>();
             CreateMap<SellerViewModel, Seller>();
             CreateMap<UsersViewModel,Users>();
-            CreateMap<OperationViewModel,Operation>();
+            CreateMap<OperationViewModel, Operation>();
+            CreateMap<ReportViewModel, Report>();
         }
     }
 }

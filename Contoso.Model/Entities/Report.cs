@@ -1,12 +1,10 @@
-﻿using Contoso.Model.Enumration;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Contoso.API.ViewModels
+namespace Contoso.Model.Entities
 {
-    public class OperationViewModel
+    public class Report : IEntityBase
     {
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
@@ -14,9 +12,9 @@ namespace Contoso.API.ViewModels
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
+        public Seller Seller { get; set; }
         public int SellerId { get; set; }
-        public string SellerName { get; set; }
-        public int Discount { get; set; }
+        public double Discount { get; set; }
         public string OperationType { get; set; }
     }
 }

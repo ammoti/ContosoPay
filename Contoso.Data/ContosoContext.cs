@@ -49,6 +49,14 @@ namespace Contoso.Data
             modelBuilder.Entity<Operation>().HasOne(a => a.Seller)
                 .WithMany(u => u.OperationCreated)
                 .HasForeignKey(a => a.SellerId);
+
+            modelBuilder.Entity<Report>().ToTable("Reports");
+            modelBuilder.Entity<Report>().Property(s => s.SellerId).IsRequired();
+            modelBuilder.Entity<Report>().Property(s => s.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Report>().Property(s => s.CreateDate).HasDefaultValue(DateTime.Now);
+            modelBuilder.Entity<Report>().HasOne(a => a.Seller)
+                .WithMany(u => u.Reports)
+                .HasForeignKey(a => a.SellerId);
         }
 
     }

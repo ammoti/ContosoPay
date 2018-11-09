@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="selList">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Min Range</th>
+          <th>Max Range</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let seller of sellers; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ seller.name }}</td>
+          <td>{{ seller.minRange }}</td>
+          <td>{{ seller.maxRange }}</td>
+          <td>
+            <button type="button" class="btn btn-info" (click)="onEdit(seller.id)">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="onDelete(seller.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right">
+      <button type="submit" class="btn btn-primary" (click)="onNew()">
+        New
+      </button>
+    </div>
+  </div>
+  <div class="regentry" *ngIf="showNew">
+    <form (ngSubmit)="onSave()">
+      <div class="form-group row">
+        <label for="name-input" class="col-2 col-form-label">Name</label>
+        <div class="col-10">
+          <input
+            class="form-control"
+            type="text"
+            [(ngModel)]="selModel.name"
+            name="name"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="minRange-input" class="col-2 col-form-label"
+          >Min Range</label
+        >
+        <div class="col-10">
+          <input
+            class="form-control"
+            type="number"
+            [(ngModel)]="selModel.minRange"
+            name="minRange"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="maxRange-input" class="col-2 col-form-label"
+          >Max Range</label
+        >
+        <div class="col-10">
+          <input
+            class="form-control"
+            type="number"
+            [(ngModel)]="selModel.maxRange"
+            name="maxRange"
+          />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-success">{{submitType}}</button>
+      <button type="submit" class="btn btn-primary" (click)="onCancel()">Cancel</button>
+    </form>
+  </div>
+  <br />
+</div>

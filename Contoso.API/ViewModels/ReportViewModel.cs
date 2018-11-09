@@ -1,12 +1,11 @@
-﻿using Contoso.Model.Enumration;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Contoso.API.ViewModels
 {
-    public class OperationViewModel
+    public class ReportViewModel
     {
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
@@ -17,6 +16,5 @@ namespace Contoso.API.ViewModels
         public int SellerId { get; set; }
         public string SellerName { get; set; }
         public int Discount { get; set; }
-        public string OperationType { get; set; }
     }
 }

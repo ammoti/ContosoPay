@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/2394fc68-4599-4d63-acb5-5d6074349503/resourceGroups/contosoxpay/providers/Microsoft.Web/sites/contosoxpay",
+    "appService.deploySubpath": ""
+}

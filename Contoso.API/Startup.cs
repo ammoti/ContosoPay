@@ -74,6 +74,7 @@ namespace Contoso.API
             services.AddScoped<ISaleRepository, SaleRepository>();
             services.AddScoped<ISellerRepository, SellerRepository>();
             services.AddScoped<IOperationRepository, OperationRepository>();
+            services.AddScoped<IReportRepository, ReportRepository>();
 
             //AutoMapper
             AutoMapperConfiguration.Configure();

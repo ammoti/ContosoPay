@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="opeList">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Seller</th>
+          <th>Discount</th>
+          <th>Type</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of operations; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ item.sellerName }}</td>
+          <td>{{ item.discount }}</td>
+          <td>{{ item.operationType }}</td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-info"
+              (click)="onEdit(item.id)"
+            >
+              Edit
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="onDelete(item.id)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right">
+      <button type="submit" class="btn btn-primary" (click)="onNew()">
+        New
+      </button>
+    </div>
+  </div>
+  <div class="regentry" *ngIf="showNew">
+    <form (ngSubmit)="onSave()">
+      <div class="form-group row">
+        <label for="discount-input" class="col-2 col-form-label">Discount</label>
+        <div class="col-10">
+          <input
+            class="form-control"
+            type="text"
+            [(ngModel)]="opeModels.discount"
+            name="discount"
+          />
+        </div>
+      </div>
+    
+      <div class="form-group row">
+          <label for="seller-input" class="col-2 col-form-label">Seller</label>
+          <div class="col-10 dropdown" ngbDropdown myDrop="ngbDropdown">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              id="dropdownManual"
+              name="seller"
+              ngbDropdownToggle
+            >
+              {{ opeModels.sellerName }}
+            </button>
+            <div ngbDropdownMenu aria-labelledby="dropdownManual">
+              <button
+                type="button"
+                class="dropdown-item"
+                *ngFor="let item of sellers"
+                (click)="onChangeSeller(item.id,item.name)"
+              >
+                {{ item.name }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="operationType-input" class="col-2 col-form-label">Operation Type</label>
+            <div class="col-10 dropdown" ngbDropdown myDrop="ngbDropdown">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                id="dropdownManual"
+                name="operationType"
+                ngbDropdownToggle
+              >
+                {{ opeModels.typeName }}
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <button
+                  type="button"
+                  class="dropdown-item"
+                  *ngFor="let item of operationTypes"
+                  (click)="onChangeOperationType(item.id,item.name)"
+                >
+                  {{ item.name }}
+                </button>
+              </div>
+            </div>
+          </div>
+      <button type="submit" class="btn btn-success">{{ submitType }}</button>
+      <button type="submit" class="btn btn-primary" (click)="onCancel()">
+        Cancel
+      </button>
+    </form>
+  </div>
+  <br />
+</div>

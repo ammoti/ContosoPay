@@ -6,7 +6,7 @@ namespace Contoso.Model.Enumration
 {
     public enum OperationType
     {
-        Saie = 1,
+        Sale = 1,
         CardInitiate= 2
     }
 }

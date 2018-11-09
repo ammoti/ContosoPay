@@ -10,6 +10,7 @@ namespace Contoso.Model.Entities
         {
             SaleCreated = new List<Sale>();
             OperationCreated = new List<Operation>();
+            Reports = new List<Report>();
         }
         public int Id { get; set; }
         public DateTime CreateDate { get; set; }
@@ -22,6 +23,7 @@ namespace Contoso.Model.Entities
 
         public ICollection<Sale> SaleCreated { get; set; }
         public ICollection<Operation> OperationCreated { get; set; }
+        public ICollection<Report> Reports{ get; set; }
 
 
     }

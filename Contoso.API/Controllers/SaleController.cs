@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Contoso.API.ViewModels;
 using Contoso.Model.Entities;
+using Contoso.Model.Enumration;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,12 +17,14 @@ namespace Contoso.API.Controllers
         private ISaleRepository _saleRepository;
         private ISellerRepository _sellerRepository;
         private IOperationRepository _operationRepository;
+        private IReportRepository _reportRepository;
 
-        public SaleController(ISaleRepository saleRepository, ISellerRepository sellerRepository, IOperationRepository operationRepository)
+        public SaleController(ISaleRepository saleRepository, ISellerRepository sellerRepository, IOperationRepository operationRepository, IReportRepository reportRepository)
         {
             _saleRepository = saleRepository;
             _sellerRepository = sellerRepository;
             _operationRepository = operationRepository;
+            _reportRepository = reportRepository;
         }
 
         [HttpGet("{id}", Name = "GetSale")]
@@ -53,6 +56,24 @@ namespace Contoso.API.Controllers
 
             _saleRepository.Add(_newSale);
             _saleRepository.Commit();
+
+            IEnumerable<Operation> operations = _operationRepository.FindBy(x => x.SellerId == sale.SellerId).ToList();
+
+            var cardInit = operations.FirstOrDefault(x => x.OperationType == OperationType.CardInitiate);
+            var cardSale = operations.FirstOrDefault(x => x.OperationType == OperationType.Sale);
+
+            Report newReport = new Report()
+            {
+                Discount = sale.SaleType == SaleType.CardInitiate ? (cardInit != null ? cardInit.Discount : 5) : (sale.Price * (cardSale != null ? cardSale.Discount : 10) / 100),
+                CreateDate = DateTime.Now,
+                UpdateDate = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                OperationType = sale.SaleType == SaleType.CardInitiate ? OperationType.CardInitiate.ToString() : OperationType.Sale.ToString(),
+                SellerId = sale.SellerId
+            };
+            _reportRepository.Add(newReport);
+            _reportRepository.Commit();
 
             sale = Mapper.Map<Sale, SaleViewModel>(_newSale);
 
@@ -107,7 +128,7 @@ namespace Contoso.API.Controllers
             }
         }
 
-        [HttpPost("CardInit",Name ="CardInitiate")]
+        [HttpPost("CardInit", Name = "CardInitiate")]
         public IActionResult CardInitiate([FromBody] CardViewModel cardViewModel)
         {
             long cardNo = Core.Extensions.CardNoDecrypt(cardViewModel.SellerCode);
